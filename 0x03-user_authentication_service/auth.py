@@ -4,6 +4,7 @@
 
 from ast import Bytes
 import email
+import bcrypt
 
 
 def _hash_password(password: str) -> str:
