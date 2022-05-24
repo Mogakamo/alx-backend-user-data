@@ -39,3 +39,25 @@ class DB:
             self._session.add(new)
             self._session.commit()
             return new
+
+        def find_user_by(self, **kwargs) -> User:
+            """Return the first row found in the users table based on tkeyword args"""
+
+            try:
+                record = self._session.query(User).filter_by(**kwargs).first()
+            except TypeError:
+                raise InvalidRequestError
+            if record is None:
+                raise NoResultFound
+            return record
+
+        def update_user(self, user_id: int, **kwargs) -> User:
+            """ Updates Users"""
+            user = self.find_user_by(id=user_id)
+            for key, value in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+                else:
+                    raise ValueError
+            self._session.commit()
+            return None
