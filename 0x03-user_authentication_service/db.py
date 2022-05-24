@@ -22,7 +22,7 @@ class DB:
         self._engine = create_engine("sqlite:///a.db", echo=True)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
-        self._session = None
+        self.__session = None
 
         @property
         def _session(self) -> Session:
