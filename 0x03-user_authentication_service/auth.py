@@ -5,8 +5,9 @@
 from ast import Bytes
 import email
 
+
 def _hash_password(password: str) -> str:
-    """ Takes a password string arguments and 
+    """ Takes a password string arguments and
     returns bytes"""
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password.encode(), salt)
